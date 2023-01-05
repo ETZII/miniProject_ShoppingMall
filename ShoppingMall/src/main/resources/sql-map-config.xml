@@ -6,10 +6,12 @@
 <configuration>
   <typeAliases>
      <typeAlias alias="member" type="com.yejishop.portfolio.member.MemberVO"   />  
+     <typeAlias alias="product" type="com.yejishop.portfolio.product.ProductVO"   />  
   
   </typeAliases>
 
   <mappers>
      <mapper resource="mappings/member-mapping.xml"  />
+     <mapper resource="mappings/product-mapping.xml"  />
   </mappers>
 </configuration> 

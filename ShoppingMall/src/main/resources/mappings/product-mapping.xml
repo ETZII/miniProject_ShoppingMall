@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PRODUCT">
+
+<resultMap type="product" id="productSelectRM">
+		<result property="pdId" column="pd_id"/>
+		<result property="pdType" column="pd_type"/>
+		<result property="pdName" column="pd_name"/>
+		<result property="pdPrice" column="pd_price"/>
+		<result property="pdExplain" column="pd_explain"/>
+		<result property="pdImgstr" column="pd_imgstr"/>
+		<result property="pdShow" column="pd_show"/>
+	</resultMap>
+
+<insert id="insert" parameterType="product">
+  insert  into TBL_PRODUCT(pd_id,pd_type,pd_name,pd_price,pd_explain,pd_imgstr)
+  values (seq_pd_id.nextval,#{pdType},#{pdName},#{pdPrice},#{pdExplain},#{pdImgstr}) 
+</insert>
+
+
+</mapper>

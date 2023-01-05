@@ -30,7 +30,7 @@
 </c:if>
 <c:if test="${memberGrade eq 'admin'}">
 	&emsp;&emsp;<a href="${path}/memberList.do">회원목록</a>
-	&emsp;&emsp;<a href="javascript:void(0)">상품등록</a>
+	&emsp;&emsp;<a href="${path}/product/product_form.jsp">상품등록</a>
 </c:if>
 	&emsp;&emsp;<a href="javascript:void(0)">상품조회</a>
 	&emsp;&emsp;<a href="javascript:void(0)">장바구니</a>
