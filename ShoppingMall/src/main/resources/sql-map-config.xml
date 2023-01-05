@@ -5,7 +5,7 @@
 
 <configuration>
   <typeAliases>
-     <typeAlias alias="member" type="com.majustory.portfolio.member.MemberVO"   />  
+     <typeAlias alias="member" type="com.yejishop.portfolio.member.MemberVO"   />  
   
   </typeAliases>
 

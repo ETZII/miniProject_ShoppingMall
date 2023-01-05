@@ -1,6 +1,6 @@
 package com.yejishop.portfolio.member;
 
-import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 public class MemberDaoImpl implements MemberDao{
 
 	@Autowired
-	private SqlSession mybatis;
+	private SqlSessionTemplate mybatis;
 	
 	@Override
 	public void insert(MemberVO vo) {
