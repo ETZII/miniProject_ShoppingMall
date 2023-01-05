@@ -25,6 +25,7 @@ nav a {
   line-height: 2;
 }
 section {
+	text-align: center;
 	background:#eaeaea;
 	min-height:550px;
 	line-height:27px;
@@ -48,4 +49,18 @@ img .welcome {
 	display:block;
 	width: 100px;
 	height: 50px;
+}
+
+
+/* 회원 목록 조회 */
+.member_list div {
+	margin: auto;
+}
+.member_list table tr td:last-child {
+	 text-align: left;
+}
+
+/* 회원 상세 조히 */
+.member_detail table {
+	 margin: auto;
 }

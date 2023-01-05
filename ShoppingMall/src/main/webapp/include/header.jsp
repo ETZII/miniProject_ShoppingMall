@@ -21,14 +21,15 @@
 </header>
 <nav>
 <c:if test="${not empty memberId}">
-	&emsp;&emsp;<a href="${path}/logout.do">로그아웃</a>
+	&emsp;${memberId}님 환영합니다 &emsp; 
+	<a href="${path}/logout.do">로그아웃</a>
 </c:if>
 <c:if test="${empty memberId}">
 	&emsp;&emsp;<a href="${path}/member/login.jsp">로그인</a>
 	&emsp;&emsp;<a href="${path}/member/member_form.jsp">회원가입</a>
 </c:if>
-<c:if test="${memberGrade}=='admin'">
-	&emsp;&emsp;<a href="javascript:void(0)">회원목록</a>
+<c:if test="${memberGrade eq 'admin'}">
+	&emsp;&emsp;<a href="${path}/memberList.do">회원목록</a>
 	&emsp;&emsp;<a href="javascript:void(0)">상품등록</a>
 </c:if>
 	&emsp;&emsp;<a href="javascript:void(0)">상품조회</a>

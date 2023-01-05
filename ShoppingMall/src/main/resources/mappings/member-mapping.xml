@@ -26,11 +26,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   #{userAddr2},#{userAddr3},#{userName},#{userAge},#{userGender}) 
 </insert>
 
+<update id="update" parameterType="member">
+  update tbl_member set user_etc=#{userEtc} where user_id=#{userId}
+</update>
+
 <select id="idCheck"  resultType="String">
  select user_id from tbl_member where user_id =#{userId}
 </select>
 
-<!-- 
 <select id="getMemeberList"  resultType="member" resultMap="memberSelectRM">
  select * from tbl_member
  where 1=1 
@@ -44,9 +47,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     and userAddr2 like '%'||#{searchKeyword}||'%'  
   </if>
 </select>
- -->
 
 <select id="getIdPwd"  resultType="member" resultMap="memberSelectRM">
  select user_id, user_password, user_grade from tbl_member where user_id = #{userId}
 </select>
+
+<select id="getMemeberDetail"  resultType="member" resultMap="memberSelectRM">
+ select * from tbl_member where user_id =#{userId}
+</select>
+
 </mapper>

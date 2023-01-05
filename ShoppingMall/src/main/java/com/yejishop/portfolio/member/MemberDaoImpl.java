@@ -1,5 +1,7 @@
 package com.yejishop.portfolio.member;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,11 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
+	public void update(MemberVO vo) {
+		mybatis.update("MEMBER.update", vo);
+	}
+	
+	@Override
 	public String idCheck(MemberVO vo) {
 		return mybatis.selectOne("MEMBER.idCheck", vo);
 	}
@@ -25,4 +32,16 @@ public class MemberDaoImpl implements MemberDao{
 		return mybatis.selectOne("MEMBER.getIdPwd", vo);
 	}
 
+	@Override
+	public List<MemberVO> select(MemberVO vo) {
+		return mybatis.selectList("MEMBER.getMemeberList", vo);
+	}
+
+	@Override
+	public MemberVO selectDetail(MemberVO vo) {
+		return mybatis.selectOne("MEMBER.getMemeberDetail", vo);
+	}
+
+
+	
 }

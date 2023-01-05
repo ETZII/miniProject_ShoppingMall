@@ -19,4 +19,5 @@ public class MemberVO {
   private String searchCondition;
   private String searchKeyword;
   private String userRegdate;
+  
 }
