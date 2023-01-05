@@ -20,9 +20,14 @@
  <b> 미니프로젝트 yeji's 쇼핑몰 회원관리 </b>
 </header>
 <nav>
+<c:if test="${not empty memberId}">
+	&emsp;&emsp;<a href="${path}/logout.do">로그아웃</a>
+</c:if>
+<c:if test="${empty memberId}">
 	&emsp;&emsp;<a href="${path}/member/login.jsp">로그인</a>
 	&emsp;&emsp;<a href="${path}/member/member_form.jsp">회원가입</a>
-<c:if test="{userGrade}=='admin'">
+</c:if>
+<c:if test="${memberGrade}=='admin'">
 	&emsp;&emsp;<a href="javascript:void(0)">회원목록</a>
 	&emsp;&emsp;<a href="javascript:void(0)">상품등록</a>
 </c:if>

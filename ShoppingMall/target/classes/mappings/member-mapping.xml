@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="userName" column="user_name"/>
 		<result property="userAge" column="user_age"/>
 		<result property="userGender" column="user_gender"/>
+		<result property="userGrade" column="user_grade"/>
 		<result property="userRegdate" column="user_regdate"/>
 	</resultMap>
 
@@ -25,11 +26,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   #{userAddr2},#{userAddr3},#{userName},#{userAge},#{userGender}) 
 </insert>
 
-<!-- 
-<select id="getCheckId"  resultType="String">
+<select id="idCheck"  resultType="String">
  select user_id from tbl_member where user_id =#{userId}
 </select>
 
+<!-- 
 <select id="getMemeberList"  resultType="member" resultMap="memberSelectRM">
  select * from tbl_member
  where 1=1 
@@ -43,9 +44,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     and userAddr2 like '%'||#{searchKeyword}||'%'  
   </if>
 </select>
-
-<select id="getIdPwd"  resultType="member">
- select user_id as userId, user_password as userPassword from tbl_member where user_id = #{userId}
-</select>
  -->
+
+<select id="getIdPwd"  resultType="member" resultMap="memberSelectRM">
+ select user_id, user_password, user_grade from tbl_member where user_id = #{userId}
+</select>
 </mapper>

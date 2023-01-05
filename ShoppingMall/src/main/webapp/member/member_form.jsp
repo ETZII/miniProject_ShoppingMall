@@ -8,41 +8,6 @@
 <script src=${path}/include/main.js ></script>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js" ></script>
-<script>
-jQuery.ajaxSetup({cache:false});
-
-function getContextPath() {
-	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
-	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
-};
-/*
-$(document).ready( function(){
-	  $('#idCheck').click( function(){	
-		  var path = getContextPath();
-		  var  dataStr={
-				  userId : $('#userId').val()			  
-		  };
-		  		 
-		  $.ajax({			 
-			  type: "GET",
-			  url :  path+"/idCheck.do",
-			  data : dataStr,
-			  success: function (data){
-			   if(data == "null"){
-				   alert("사용가능한 아이디 입니다.!!"); 
-			   } else {
-				   alert(data+"는 벌써 사용하고 있습니다.!!");
-				   $('#userId').val("");
-				   $('#userId').focus();
-			   }
-			  }	  
-		  })
-	  }) 
-})
-*/
-</script>
-
-
 
 <section>
 <br>
@@ -58,7 +23,7 @@ $(document).ready( function(){
     <td align="center">성별</td>  <td>
     &emsp;<input type=radio name=userGender value="남" checked  /> 남
     <input type=radio name=userGender value="여"  /> 여</td></tr>
-<tr><td align="center">패스워드</td>  <td colspan=3>&emsp;<input type=text name=userPassword  /> </td></tr>
+<tr><td align="center">패스워드</td>  <td colspan=3>&emsp;<input type=password name=userPassword  /> </td></tr>
 <tr><td align="center">전화번호</td>  <td colspan=3>&emsp;<input type=text name=userPhone size=40 /> </td></tr>
 <tr><td align="center">회원주소</td> 
  <td colspan=3>
@@ -85,28 +50,6 @@ $(document).ready( function(){
 </form>
 </div>
 <br>
-
-
-
-<script>
-function ch1() {
-	if(f1.userName.value==""){
-	  alert("이름을 입력해 주세요");
-	  f1.userName.focus();
-	  return false;
-	}
-	if(f1.userId.value==""){
-	  alert("아이디를 입력해 주세요");
-	  f1.userId.focus();
-	  return false;
-	}
-	if(f1.userPassword.value==""){
-	  alert("암호를 입력해 주세요");
-	  f1.userPassword.focus();
-	  return false;	
-	}	  
-}
-</script>
 
 </section>
 <c:import url="/include/footer.jsp" />

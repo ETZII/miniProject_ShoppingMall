@@ -15,4 +15,14 @@ public class MemberDaoImpl implements MemberDao{
 		mybatis.insert("MEMBER.insert", vo);
 	}
 
+	@Override
+	public String idCheck(MemberVO vo) {
+		return mybatis.selectOne("MEMBER.idCheck", vo);
+	}
+
+	@Override
+	public MemberVO getIdPwd(MemberVO vo) {
+		return mybatis.selectOne("MEMBER.getIdPwd", vo);
+	}
+
 }

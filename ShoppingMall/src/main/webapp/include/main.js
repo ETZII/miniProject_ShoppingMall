@@ -1,4 +1,55 @@
 
+/* 회원가입 */
+function ch1() {
+	if(f1.userName.value==""){
+	  alert("이름을 입력해 주세요");
+	  f1.userName.focus();
+	  return false;
+	}
+	if(f1.userId.value==""){
+	  alert("아이디를 입력해 주세요");
+	  f1.userId.focus();
+	  return false;
+	}
+	if(f1.userPassword.value==""){
+	  alert("암호를 입력해 주세요");
+	  f1.userPassword.focus();
+	  return false;	
+	}	  
+}
+//중복확인(비동기)
+jQuery.ajaxSetup({cache:false});
+
+function getContextPath() {
+	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+};
+
+$(document).ready( function(){
+	  $('#idCheck').click( function(){	
+		  var path = getContextPath();
+		  var  dataStr={
+				  userId : $('#userId').val()			  
+		  };
+		  		 
+		  $.ajax({			 
+			  type: "GET",
+			  url :  path+"/idCheck.do",
+			  data : dataStr,
+			  success: function (data){
+			   if(data == "null"){
+				   alert("사용가능한 아이디 입니다.!!"); 
+			   } else {
+				   alert(data+"는 벌써 사용하고 있습니다.!!");
+				   $('#userId').val("");
+				   $('#userId').focus();
+			   }
+			  }	  
+		  })
+	  }) 
+})
+
+
 /* 카카오 주소찾기 API */
 function sample6_execDaumPostcode() {
     new daum.Postcode({

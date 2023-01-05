@@ -14,4 +14,14 @@ public class MemberServiceImpl implements MemberService {
 		dao.insert(vo);
 	}
 
+	@Override
+	public String idCheck(MemberVO vo) {
+		return dao.idCheck(vo);
+	}
+
+	@Override
+	public MemberVO getIdPwd(MemberVO vo) {
+		return dao.getIdPwd(vo);
+	}
+
 }
