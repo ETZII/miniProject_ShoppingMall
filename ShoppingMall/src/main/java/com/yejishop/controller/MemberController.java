@@ -13,8 +13,9 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-	@RequestMapping("/member/memberOK.do")
+	@RequestMapping("/memberOK.do")
 	String insert(MemberVO vo) {
+		System.out.println("==> insert 실행");
 		service.insert(vo);
 		return "index.jsp";
 	}

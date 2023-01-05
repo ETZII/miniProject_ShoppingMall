@@ -1,0 +1,45 @@
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+header {
+  color: #fff;
+  height: 50px;
+  background-color: #000;
+  text-align: center;
+  padding-top: 15px;
+  font-size: 30px;
+  display: block;
+}
+nav {
+  height: 30px;
+  background-color: #333;
+  color: #fff;
+}
+nav a {
+  color: #fff;
+  font-weight: 700;
+  line-height: 2;
+}
+section {
+	background:#eaeaea;
+	min-height:550px;
+	line-height:27px;
+}
+section div:first-child {
+	text-align: center;
+	font-size: 20px;
+}
+
+footer {
+  display: block;
+  height: 30px;
+  background-color: #000;
+  text-align: center;
+  padding-top: 10px;
+  color: #fff;
+  font-weight: 700;
+}
