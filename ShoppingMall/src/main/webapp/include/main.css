@@ -67,3 +67,10 @@ img .welcome {
 .member_detail table {
 	 margin: auto;
 }
+
+
+/* 상품조회 */
+.product_list img{
+	width: 100px;
+	height: 100px;
+}

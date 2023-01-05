@@ -1,5 +1,7 @@
 package com.yejishop.portfolio.product;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,16 @@ public class ProductServiceImpl implements ProductService {
 	public void insert(ProductVO vo) {
 		dao.insert(vo);
 	}
-	
+
+	@Override
+	public List<ProductVO> select(ProductVO vo,String grade) {
+		return dao.select(vo,grade);
+	}
+
+	@Override
+	public int totalCount(String adminChk) {
+		return dao.totalCount(adminChk);
+	}
+
 	
 }

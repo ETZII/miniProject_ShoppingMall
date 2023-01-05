@@ -1,5 +1,8 @@
 package com.yejishop.portfolio.product;
 
+import java.util.List;
+
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,5 +17,26 @@ public class ProductDaoImpl  implements ProductDao {
 	public void insert(ProductVO vo) {
 		mybatis.insert("PRODUCT.insert", vo);
 	}
-	
+
+	@Override
+	public List<ProductVO> select(ProductVO vo,String grade) {
+		List<ProductVO> li = mybatis.selectList("PRODUCT.getProductListY", vo);
+		if(grade==null) {
+		}else if(grade.equals("admin")) {
+			li = mybatis.selectList("PRODUCT.getProductListAll", vo);
+		}
+		return li;
+	}
+
+	@Override
+	public int totalCount(String adminChk) {
+		
+		int result = mybatis.selectOne("PRODUCT.countYProduct");
+		if(adminChk==null) {
+			
+		}else if(adminChk.equals("admin")) {
+			result = mybatis.selectOne("PRODUCT.countAllProduct");
+		}
+		return result;
+	}
 }

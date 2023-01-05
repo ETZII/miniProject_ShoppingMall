@@ -20,5 +20,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   values (seq_pd_id.nextval,#{pdType},#{pdName},#{pdPrice},#{pdExplain},#{pdImgstr}) 
 </insert>
 
+<select id="getProductListAll"  resultType="product" resultMap="productSelectRM">
+  <![CDATA[
+ select  rownum, Q.*   
+  from  
+    (  
+      select  rownum  as rnum, K.*  
+      from  
+      (select *  from tbl_product order  by pd_id desc) K   
+      where  rownum <=  #{start} + #{pageSize} - 1   
+       )Q  
+  where rnum >= #{start}
+  ]]>
+ 
+</select>
 
+<select id="getProductListY"  resultType="product" resultMap="productSelectRM">
+  <![CDATA[
+ select  rownum, Q.*   
+  from  
+    (  
+      select  rownum  as rnum, K.*  
+      from  
+      (select *  from tbl_product where pd_show='y' order by pd_id desc) K   
+      where  rownum <=  #{start} + #{pageSize} - 1   
+       )Q  
+  where rnum >= #{start}
+  ]]>
+ 
+</select>
+
+<select id="countAllProduct"  resultType="int">
+ select count(*) from tbl_product
+</select>
+<select id="countYProduct"  resultType="int">
+ select count(*) from tbl_product where pd_show = 'y'
+</select>
 </mapper>

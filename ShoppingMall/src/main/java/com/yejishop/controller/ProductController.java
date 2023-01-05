@@ -7,11 +7,14 @@ import java.text.SimpleDateFormat;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yejishop.portfolio.product.ProductServiceImpl;
@@ -59,8 +62,44 @@ public class ProductController {
 		}		
 		vo.setPdImgstr(fileName);
     	service.insert(vo);
-		return "index.jsp";	
-//		return "productList.do";	
-		
+//		return "index.jsp";	
+		return "productList.do";	
 	}
+	
+	@RequestMapping("/productList.do")
+	String productList(HttpSession session, Model model, ProductVO vo) {
+		System.out.println("===> productList 실행");
+		System.out.print("vo.getStart():" + vo.getStart());
+	   	int  pageSize=10;
+	   	int  pageListSize = 5;
+	   	int  start = 0;
+	   	
+	    if (vo.getStart() == 0) {
+  		  start = 1;  
+	  	}else {
+	  	  start = vo.getStart();
+	  	}
+  	  
+	  	int  totalCount=service.totalCount((String) session.getAttribute("memberId"));  
+	  	int  totalPage =(int) (Math.ceil((double) totalCount / pageSize));  
+	  	int  nowPage = start / pageSize + 1 ;
+	  	int  listStartpage =  (nowPage - 1) / pageListSize * pageListSize + 1;
+	  	int  listEndPage = listStartpage + pageListSize - 1 ;
+	  	int  endPage = (totalPage - 1) * pageSize + 1 ; 
+	  	
+	  	vo.setPageSize(pageSize) ;
+	  	vo.setPageListSize(pageListSize);
+	  	vo.setTotalCount(totalCount);
+	  	vo.setTotalPage(totalPage);
+	  	vo.setStart(start);
+	  	vo.setNowPage(nowPage);
+	  	vo.setListStartpage(listStartpage);
+	  	vo.setListEndPage(listEndPage);
+	  	vo.setEndPage(endPage);
+		
+	  	model.addAttribute("m", vo);
+	  	model.addAttribute("li", service.select(vo,(String) session.getAttribute("memberId")));
+		return "/product/product_list.jsp";
+	}
+
 }
