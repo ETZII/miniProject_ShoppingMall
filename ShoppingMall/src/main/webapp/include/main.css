@@ -43,3 +43,9 @@ footer {
   color: #fff;
   font-weight: 700;
 }
+
+img .welcome {
+	display:block;
+	width: 100px;
+	height: 50px;
+}

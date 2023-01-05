@@ -37,7 +37,10 @@
   
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/config/presentation-layer.xml</param-value>
+      <param-value>
+      	/WEB-INF/config/presentation-layer.xml
+      	/WEB-INF/config/spring-security.xml	
+      </param-value>
     </init-param>
   
   </servlet>
@@ -45,5 +48,5 @@
     <servlet-name>DispatcherServlet</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
-
+  
 </web-app>

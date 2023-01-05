@@ -6,9 +6,9 @@
 <section>
 <br><br><br>
 <div align="center">
-<img src=${path}/member/img/welcome.PNG />
 
 <h2>회원 가입을 환영합니다.</h2>
+<img class="welcome" src=${path}/member/img/welcome.png />
 </div>
 </section>
 <c:import url="/include/footer.jsp" />

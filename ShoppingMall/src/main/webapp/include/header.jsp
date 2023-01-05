@@ -20,7 +20,14 @@
  <b> 미니프로젝트 yeji's 쇼핑몰 회원관리 </b>
 </header>
 <nav>
-&emsp;&emsp;<a href="${path}/member/member_form.jsp">회원가입</a>
-
-&emsp;&emsp;<a href="${path}/index.jsp">홈으로.</a>
+	&emsp;&emsp;<a href="${path}/member/login.jsp">로그인</a>
+	&emsp;&emsp;<a href="${path}/member/member_form.jsp">회원가입</a>
+<c:if test="{userGrade}=='admin'">
+	&emsp;&emsp;<a href="javascript:void(0)">회원목록</a>
+	&emsp;&emsp;<a href="javascript:void(0)">상품등록</a>
+</c:if>
+	&emsp;&emsp;<a href="javascript:void(0)">상품조회</a>
+	&emsp;&emsp;<a href="javascript:void(0)">장바구니</a>
+	&emsp;&emsp;<a href="javascript:void(0)">결제내역</a>
+	&emsp;&emsp;<a href="${path}/index.jsp">홈으로.</a>
 </nav>
