@@ -30,4 +30,24 @@ public class CartServiceImpl implements CartService {
 	public int updateCart(CartVO vo) {
 		return dao.updateCart(vo);
 	}
+
+	@Override
+	public CartVO isExist(CartVO vo) {
+		return dao.isExist(vo);
+	}
+
+	@Override
+	public int insertUpdate(CartVO vo) {
+		return dao.insertUpdate(vo);
+	}
+
+	@Override
+	public void deleteCart(CartVO vo) {
+		dao.deleteCart(vo);
+	}
+
+	@Override
+	public void deleteCartAll(CartVO vo) {
+		dao.deleteCartAll(vo);
+	}
 }

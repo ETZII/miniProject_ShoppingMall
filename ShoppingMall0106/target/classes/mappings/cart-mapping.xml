@@ -23,6 +23,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   update TBL_CART set amount=#{amount} where cart_id=#{cartId}
 </update>
 
+<delete id="delete">
+  delete from TBL_CART where cart_id=#{cartId}
+</delete>
+<delete id="deleteAll">
+  delete from TBL_CART where user_id=#{userId}
+</delete>
+
+
+<!-- insert할 때 이미 있으면 수량 추가 -->
+<update id="insertUpdate">
+  update TBL_CART set amount=amount+#{amount} where cart_id=#{cartId}
+</update>
+
 <select id="selectCart"  resultType="cart" resultMap="cartSelectRM">
  select cart_id,c.user_id,user_name,c.pd_id,pd_name,pd_price,amount
  from TBL_CART c
@@ -38,5 +51,12 @@ select sum(pd_price*amount)
  where user_id = #{userId}
 </select>
 
+<select id="isExist"  resultType="cart" resultMap="cartSelectRM">
+ select cart_id,c.pd_id
+ from TBL_CART c
+ 	inner join TBL_PRODUCT p on c.pd_id=p.pd_id
+ 	inner join TBL_MEMBER m on c.user_id=m.user_id
+ where c.user_id =#{userId} and c.pd_id = #{pdId}
+</select>
 
 </mapper>

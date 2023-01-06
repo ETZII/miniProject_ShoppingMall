@@ -5,51 +5,47 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" ></script>
 
-<script src=${path}/include/main.js ></script>
+<c:set var= "path" value="${pageContext.request.contextPath}" />
+<c:import url="/include/header.jsp" />
+
 <script>
-function edit() {
-	
-	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
-	
-	var path = location.href.substring(0,location.href.indexOf('/', hostIndex + 1));
-	
-	var amount = $('#amount').val();
-	var id = $('#userId').val();
-	var cartid = $('#cartId').val();
-	
-	location.href=path+'/cartUpdate.do?cartId='+cartid+'&amount='+amount+'&userId='+id;
+function deleteCart(cartId) {
+	alert(cartId);
+	location.href="${path}/deleteCart.do?cartId="+cartId;
 }
 </script>
 
-
-
-<c:set var= "path" value="${pageContext.request.contextPath}" />
-<c:import url="/include/header.jsp" />
 <section class="cart_list">
 <br>
 <div align=center>
 <h2>${userId}님의 장바구니 </h2>
 <input type="hidden" id="userId" value="${userId}"/>
+<form method=post  name="form">
 <table border=1>
  <tr align="center">
-      <th> 상품명  </th> <th> 단가  </th> <th> 수량  </th>  <th> 총 금액  </th> 
-      <th> 수량변경 및 삭제 </th>
+      <th>상품번호</th><th> 상품명  </th> <th> 단가  </th> <th> 수량  </th>  <th> 총 금액  </th> <th> 삭제 </th> 
+ </tr>
 <c:forEach items="${li}"  var="c" >
-
  <tr>  
+ 	  <td>${c.cartId}<input type="hidden" name="cartId" value="${c.cartId}"/></td>
       <td>${c.pdName}</td>
       <td><fmt:formatNumber value="${c.pdPrice}" pattern=",000"/>원 </td>
-      <td> <input type="text" size= 2 id="amount" value="${c.amount}"/> </td>
+      <td> <input type="text" size= 2 name="amount" value="${c.amount}"/> </td>
       <td><fmt:formatNumber value="${c.money}" pattern=",000"/>원 </td>
-      <td> <input type="hidden" id="cartId" value="${c.cartId}"/>
-      	  &emsp;<input type="button" value="변경" onclick="edit()"/>
-      	  &emsp;<input type="button" value="삭제" onclick="location.href='javascript:void(0)'" /></td>
+      <td align="center"><input type="button" value="삭제" onclick="deleteCart(${c.cartId})" /></td>
  </tr> 
 </c:forEach>
+<tr>
+	<td colspan=6 align="right">
+		<input type="submit" value="수량변경" onclick="javascript:action='${path}/cartUpdate.do'"/>
+		<input type="button" value="장바구니비우기" onclick="location.href='${path}/cartDeleteAll.do'"/>
+	&emsp;</td>
+</tr>
  <tr>
- 	<td colspan="5" align="right">총 금액 : <fmt:formatNumber value="${sumMoney}" pattern=",000"/>원&emsp;&emsp; <input type="submit" value="구매하기" /></td>
+ 	<td colspan="6" align="right">총 금액 : <fmt:formatNumber value="${sumMoney}" pattern=",000"/>원&emsp;&emsp; <input type="submit" value="구매하기" /></td>
  </tr>
  </table>
+ </form>
 
 </div>
 </section>

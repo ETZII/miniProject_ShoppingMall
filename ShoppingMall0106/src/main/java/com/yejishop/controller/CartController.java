@@ -1,10 +1,13 @@
 package com.yejishop.controller;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yejishop.portfolio.cart.CartServiceImpl;
 import com.yejishop.portfolio.cart.CartVO;
@@ -17,24 +20,54 @@ public class CartController {
 	
 	@RequestMapping("/cartOk.do")
 	String insertCart(CartVO vo, Model model) {
-		model.addAttribute("userId", vo.getUserId());
-		service.insertCart(vo);
+		System.out.println("===> insertCart 실행 ");
+		CartVO cart = service.isExist(vo);
+		if(cart==null) {
+			System.out.println("===>같은 상품 존재 X, 새로 추가");
+			service.insertCart(vo);
+		} else {
+			System.out.println("===>같은 상품 존재 O, 수량 변경");
+			vo.setCartId(cart.getCartId());
+			service.insertUpdate(vo);
+		}
 		return "redirect:cartList.do";
 	}
 	
 	@RequestMapping("/cartList.do")
-	String selectCartList(CartVO vo, Model model) {
-		
-		model.addAttribute("li", service.selectCartList(vo));
-		model.addAttribute("sumMoney",service.sumMoney(vo));
-		return "/cart/cart_list.jsp";
+	String selectCartList(CartVO vo, HttpSession session) {
+		vo.setUserId((String) session.getAttribute("userId"));
+		if(service.selectCartList(vo).size()!=0) {
+			session.setAttribute("li", service.selectCartList(vo));
+			session.setAttribute("sumMoney",service.sumMoney(vo));
+		}
+		return "redirect:/cart/cart_list.jsp";
 	}
 	
 	@RequestMapping("/cartUpdate.do")
-	String updateCart(CartVO vo, Model model) {
-		service.updateCart(vo);
-		model.addAttribute("userId",vo.getUserId());
+	String updateCart(@RequestParam String[] cartId, @RequestParam int[] amount) {
+		System.out.println("===>update 실행");
+		for(int i=0; i< cartId.length; i++) {
+			CartVO vo = new CartVO();
+			vo.setCartId(cartId[i]);
+			vo.setAmount(amount[i]);
+			service.updateCart(vo);
+		}
 		return "redirect:cartList.do";
 	}
 
+	@RequestMapping("/deleteCart.do")
+	String deleteCart(CartVO vo) {
+		service.deleteCart(vo);
+		return "redirect:cartList.do";
+	}
+	
+	@RequestMapping("/cartDeleteAll.do")
+	String deleteCartAll(CartVO vo,Model model,HttpSession session) {
+		vo.setUserId((String) session.getAttribute("userId"));
+		service.deleteCartAll(vo);
+		session.removeAttribute("sumMoney");
+		session.removeAttribute("li");
+		return "redirect:cartList.do";
+	}
+	
 }

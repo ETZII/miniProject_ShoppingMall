@@ -6,8 +6,14 @@ public interface CartService {
 
 	void insertCart(CartVO vo);
 	int updateCart(CartVO vo);
+	void deleteCart(CartVO vo);
+	void deleteCartAll(CartVO vo);
+
 	
 	List<CartVO> selectCartList(CartVO vo);
 	
 	int sumMoney(CartVO vo);
+	
+	CartVO isExist(CartVO vo);
+	int insertUpdate(CartVO vo);
 }
