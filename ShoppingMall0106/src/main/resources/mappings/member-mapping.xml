@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MEMBER">
+
+<resultMap type="member" id="memberSelectRM">
+		<result property="userId" column="user_id"/>
+		<result property="userPassword" column="user_password"/>
+		<result property="userPhone" column="user_phone"/>
+		<result property="userAddr1" column="user_addr1"/>
+		<result property="userAddr2" column="user_addr2"/>
+		<result property="userAddr3" column="user_addr3"/>
+		<result property="userName" column="user_name"/>
+		<result property="userAge" column="user_age"/>
+		<result property="userGender" column="user_gender"/>
+		<result property="userGrade" column="user_grade"/>
+		<result property="userEtc" column="user_etc"/>
+		<result property="userRegdate" column="user_regdate"/>
+	</resultMap>
+
+<insert id="insert" parameterType="member">
+  insert  into tbl_member(user_id,user_password,user_phone,
+  user_addr1,user_addr2,user_addr3,user_name,user_age,user_gender)
+  values (#{userId},#{userPassword},#{userPhone},#{userAddr1},
+  #{userAddr2},#{userAddr3},#{userName},#{userAge},#{userGender}) 
+</insert>
+
+<update id="update" parameterType="member">
+  update tbl_member set user_etc=#{userEtc} where user_id=#{userId}
+</update>
+
+<select id="idCheck"  resultType="String">
+ select user_id from tbl_member where user_id =#{userId}
+</select>
+
+<select id="getMemeberList"  resultType="member" resultMap="memberSelectRM">
+ select * from tbl_member
+ where 1=1 
+  <if test="searchCondition=='userName'" >
+    and user_name = #{searchKeyword}
+  </if>
+  <if test="searchCondition=='userId'" > 
+    and user_id = #{searchKeyword}  
+  </if>
+  <if test="searchCondition=='userAddr2'" > 
+    and userAddr2 like '%'||#{searchKeyword}||'%'  
+  </if>
+</select>
+
+<select id="getIdPwd"  resultType="member" resultMap="memberSelectRM">
+ select user_id, user_password, user_grade from tbl_member where user_id = #{userId}
+</select>
+
+<select id="getMemeberDetail"  resultType="member" resultMap="memberSelectRM">
+ select * from tbl_member where user_id =#{userId}
+</select>
+
+</mapper>
