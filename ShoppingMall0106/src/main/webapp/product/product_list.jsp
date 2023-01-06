@@ -21,7 +21,9 @@
  <tr>  
       <td align="center"> ${m.pdId} </td>
       <td><img alt="${m.pdImgstr}" src="${path}/product/files/${m.pdImgstr}" class="pdImg"/></td>
-      <td> ${m.pdType} </td>
+      <c:if test="${m.pdType eq 'monitor'}"><td> 모니터 </td></c:if>
+      <c:if test="${m.pdType eq 'keyboard'}"><td> 키보드 </td></c:if>
+      <c:if test="${m.pdType eq 'speaker'}"><td> 스피커 </td></c:if>
       <td><a href="${path}/productDetail.do?pdId=${m.pdId}">${m.pdName}</a> </td>
       <td><fmt:formatNumber value="${m.pdPrice}" pattern=",000"/> 원 </td>
       <c:if test="${memberGrade eq 'admin'}">

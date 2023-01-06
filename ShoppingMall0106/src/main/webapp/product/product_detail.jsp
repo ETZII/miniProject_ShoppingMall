@@ -16,7 +16,10 @@
 <table border=1>
 	<tr>
 		<td>상품번호</td><td>${p.pdId}<input type="hidden" name="pdId" value="${p.pdId}"/></td>
-		<td>제품타입</td><td>${p.pdType}</td>
+		<td>제품타입</td>
+		<c:if test="${p.pdType eq 'monitor'}"><td> 모니터 </td></c:if>
+     	<c:if test="${p.pdType eq 'keyboard'}"><td> 키보드 </td></c:if>
+     	<c:if test="${p.pdType eq 'speaker'}"><td> 스피커 </td></c:if>
 		<td>가격</td><td><fmt:formatNumber value="${p.pdPrice}" pattern=",000"/> 원 
 		<input type="hidden" name="pdPrice" value="${p.pdPrice}"/>
 		</td>

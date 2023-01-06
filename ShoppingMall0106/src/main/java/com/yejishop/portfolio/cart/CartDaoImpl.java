@@ -22,16 +22,18 @@ public class CartDaoImpl implements CartDao {
 		return mybatis.selectList("CARTS.selectCart", vo);
 	}
 
+
+
 	@Override
 	public int sumMoney(CartVO vo) {
+		System.out.println("sumMoney vo : "+vo);
 		return mybatis.selectOne("CARTS.sumMoney", vo);
 	}
-
+	
 	@Override
 	public int updateCart(CartVO vo) {
 		return mybatis.update("CARTS.update", vo);
 	}
-	
 	
 
 }

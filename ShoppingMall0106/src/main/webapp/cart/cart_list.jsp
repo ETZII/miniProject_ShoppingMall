@@ -17,7 +17,7 @@ function edit() {
 	var id = $('#userId').val();
 	var cartid = $('#cartId').val();
 	
-	location.href=location.href+'/cartUpdate.do?cartId='+cartid+'&amount='+amount+'&userId='+id;
+	location.href=path+'/cartUpdate.do?cartId='+cartid+'&amount='+amount+'&userId='+id;
 }
 </script>
 
