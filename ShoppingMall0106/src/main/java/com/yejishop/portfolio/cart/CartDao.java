@@ -10,6 +10,7 @@ public interface CartDao {
 	void deleteCartAll(CartVO vo);
 	
 	List<CartVO> selectCartList(CartVO vo);
+	CartVO selectCart(CartVO vo);
 	
 	int sumMoney(CartVO vo);
 

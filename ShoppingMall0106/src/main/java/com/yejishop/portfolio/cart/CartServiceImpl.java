@@ -22,6 +22,11 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
+	public CartVO selectCart(CartVO vo) {
+		return dao.selectCart(vo);
+	}
+	
+	@Override
 	public int sumMoney(CartVO vo) {
 		return dao.sumMoney(vo);
 	}
@@ -50,4 +55,5 @@ public class CartServiceImpl implements CartService {
 	public void deleteCartAll(CartVO vo) {
 		dao.deleteCartAll(vo);
 	}
+
 }

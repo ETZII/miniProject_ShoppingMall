@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <resultMap type="payment" id="paymentSelectRM">
 		<result property="paymentId" column="pay_id"/>
-		<result property="cartId" column="cart_id"/>
+		<result property="userId" column="user_id"/>
 		<result property="payDate" column="pay_date"/>
 		<result property="isRefund" column="is_refund"/>
 		<result property="pdId" column="pd_id"/>
@@ -16,16 +16,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 <insert id="insert" parameterType="payment">
-  insert  into tbl_payedlist(pay_id,cart_id)
-  values ('payment_'||seq_pay_id.nextval,#{cartId}) 
+  insert  into tbl_payedlist(pay_id,user_id,pd_id,amount)
+  values (seq_pay_id.nextval,#{userId},#{pdId},#{amount}) 
 </insert>
 
-<select id="PaymentSumMoney"  resultType="int">
+<select id="paymentSumMoney"  resultType="int">
 select sum(pd_price*amount) 
  from tbl_payedlist pay
- 	inner join TBL_CART c on c.cart_id = pay.cart_id
- 	inner join TBL_PRODUCT p on c.pd_id = p.pd_id
- where user_id = #{userId}
+ 	inner join TBL_PRODUCT p on p.pd_id = pay.pd_id
+ 	inner join TBL_MEMBER m on m.USER_ID = pay.USER_ID
+ where pay.user_id = #{userId}
+</select>
+
+<select id="selectAll" resultMap="paymentSelectRM" resultType="payment">
+ select pay_id,pay.user_id,pay.pd_id,pay.amount,pd_name,pd_price,pay_date,is_refund
+ from tbl_payedlist pay
+ 	inner join TBL_PRODUCT p on p.pd_id = pay.pd_id
+ 	inner join TBL_MEMBER m on m.USER_ID = pay.USER_ID
+ where pay.user_id = #{userId}
 </select>
 
 </mapper>

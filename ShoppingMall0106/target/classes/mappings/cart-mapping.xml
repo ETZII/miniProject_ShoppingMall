@@ -36,12 +36,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   update TBL_CART set amount=amount+#{amount} where cart_id=#{cartId}
 </update>
 
-<select id="selectCart"  resultType="cart" resultMap="cartSelectRM">
+<select id="selectCartList"  resultType="cart" resultMap="cartSelectRM">
  select cart_id,c.user_id,user_name,c.pd_id,pd_name,pd_price,amount
  from TBL_CART c
  	inner join TBL_PRODUCT p on c.pd_id=p.pd_id
  	inner join TBL_MEMBER m on c.user_id=m.user_id
  where c.user_id =#{userId}
+</select>
+
+<select id="selectCart"  resultType="cart" resultMap="cartSelectRM">
+ select cart_id, user_id, c.pd_id, pd_name, pd_price, amount
+ from TBL_CART c
+ 	inner join TBL_PRODUCT p on c.pd_id=p.pd_id
+ where cart_id =#{cartId}
 </select>
 
 <select id="sumMoney"  resultType="int">

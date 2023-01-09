@@ -11,6 +11,7 @@ public interface CartService {
 
 	
 	List<CartVO> selectCartList(CartVO vo);
+	CartVO selectCart(CartVO vo);
 	
 	int sumMoney(CartVO vo);
 	

@@ -1,6 +1,8 @@
 package com.yejishop.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +36,16 @@ public class CartController {
 	}
 	
 	@RequestMapping("/cartList.do")
-	String selectCartList(CartVO vo, HttpSession session) {
+	String selectCartList(CartVO vo, HttpSession session, Model model) {
 		vo.setUserId((String) session.getAttribute("userId"));
-		if(service.selectCartList(vo).size()!=0) {
-			session.setAttribute("li", service.selectCartList(vo));
-			session.setAttribute("sumMoney",service.sumMoney(vo));
+		List<CartVO> li = service.selectCartList(vo);
+		if(li.size()!=0) {
+			model.addAttribute("li", li);
+			model.addAttribute("sumMoney",service.sumMoney(vo));
 		} else {
-			session.setAttribute("sumMoney",0);
+			model.addAttribute("sumMoney",0);
 		}
-		return "redirect:/cart/cart_list.jsp";
+		return "/cart/cart_list.jsp";
 	}
 	
 	@RequestMapping("/cartUpdate.do")

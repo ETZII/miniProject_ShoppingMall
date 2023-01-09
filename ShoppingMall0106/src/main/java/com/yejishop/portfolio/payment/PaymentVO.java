@@ -1,13 +1,14 @@
 package com.yejishop.portfolio.payment;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
 public class PaymentVO {
 	private String paymentId;
-	private String cartId;
 	private String userId;
-	private String payDate;
+	private Date payDate;
 	private String isRefund;
 	private String pdId;    	 // 상품 번호
 	private String  pdName;		 // 상품이름

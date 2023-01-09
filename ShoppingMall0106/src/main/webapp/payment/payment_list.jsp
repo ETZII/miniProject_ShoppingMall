@@ -7,7 +7,7 @@
 <c:set var= "path" value="${pageContext.request.contextPath}" />
 <c:import url="/include/header.jsp" />
 
-<section class="cart_list">
+<section class="payment_list">
 <br>
 <div align=center>
 <h2>${userId}님의 구매 목록 </h2>
@@ -15,19 +15,19 @@
  <tr align="center">
       <th>상품번호</th><th> 상품명  </th> <th> 단가  </th> <th> 수량  </th>  <th> 총 금액  </th> <th> 구매일 </th>
  </tr>
-<c:forEach items="${li}"  var="c" >
+<c:forEach items="${li}"  var="p" >
  <tr>  
- 	  <td>${c.pdId}</td>
-      <td>${c.pdName}</td>
-      <td><fmt:formatNumber value="${c.pdPrice}" pattern=",000"/>원 </td>
-      <td> <input type="text" size= 2 name="amount" value="${c.amount}"/> </td>
-      <td><fmt:formatNumber value="${c.money}" pattern=",000"/>원 </td>
-      <td><fmt:formatNumber value="${c.payDate}" pattern="yyyy/mm/dd"/></td>
+ 	  <td>${p.pdId}</td>
+      <td>${p.pdName}</td>
+      <td><fmt:formatNumber value="${p.pdPrice}" pattern="#,###"/>원 </td>
+      <td> ${p.amount} </td>
+      <td><fmt:formatNumber value="${p.money}" pattern="#,###"/>원 </td>
+      <td><fmt:formatDate value="${p.payDate}" pattern="yyyy/MM/dd"/></td>
  </tr> 
 </c:forEach>
  <tr>
- 	<td colspan="6" align="right">총 금액 : 
- 		<fmt:formatNumber value="${sumMoney}" pattern="#,###"/>원&emsp;&emsp; 
+ 	<td colspan="6" align="right">총 결제금액 : 
+ 		<fmt:formatNumber value="${sumPaymentMoney}" pattern="#,###"/>원&emsp;&emsp; 
  	</td>
  </tr>
  </table>

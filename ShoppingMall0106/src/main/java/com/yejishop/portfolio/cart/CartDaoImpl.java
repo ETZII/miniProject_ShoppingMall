@@ -19,9 +19,14 @@ public class CartDaoImpl implements CartDao {
 
 	@Override
 	public List<CartVO> selectCartList(CartVO vo) {
-		return mybatis.selectList("CARTS.selectCart", vo);
+		return mybatis.selectList("CARTS.selectCartList", vo);
 	}
 
+	@Override
+	public CartVO selectCart(CartVO vo) {
+		return mybatis.selectOne("CARTS.selectCart", vo);
+	}
+	
 	@Override
 	public int sumMoney(CartVO vo) {
 		return mybatis.selectOne("CARTS.sumMoney", vo);
@@ -51,6 +56,6 @@ public class CartDaoImpl implements CartDao {
 	public void deleteCartAll(CartVO vo) {
 		mybatis.delete("CARTS.deleteAll", vo);
 	}
-	
+
 
 }

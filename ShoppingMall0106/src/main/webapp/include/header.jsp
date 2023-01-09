@@ -35,7 +35,7 @@
 	&emsp;&emsp;<a href="${path}/productList.do">상품조회</a>
 <c:if test="${not empty userId }">
 	&emsp;&emsp;<a href="${path}/cartList.do?userId=${userId}">장바구니</a>
-	&emsp;&emsp;<a href="javascript:void(0)">결제내역</a>
+	&emsp;&emsp;<a href="${path}/paymentList.do">결제내역</a>
 </c:if>
 	&emsp;&emsp;<a href="${path}/index.jsp">홈으로.</a>
 </nav>

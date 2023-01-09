@@ -28,9 +28,9 @@ function deleteCart(cartId) {
  <tr>  
  	  <td>${c.cartId}<input type="hidden" name="cartId" value="${c.cartId}"/></td>
       <td>${c.pdName}</td>
-      <td><fmt:formatNumber value="${c.pdPrice}" pattern=",000"/>원 </td>
+      <td><fmt:formatNumber value="${c.pdPrice}" pattern="#,###"/>원 </td>
       <td> <input type="text" size= 2 name="amount" value="${c.amount}"/> </td>
-      <td><fmt:formatNumber value="${c.money}" pattern=",000"/>원 </td>
+      <td><fmt:formatNumber value="${c.money}" pattern="#,###"/>원 </td>
       <td align="center"><input type="button" value="삭제" onclick="deleteCart(${c.cartId})" /></td>
  </tr> 
 </c:forEach>

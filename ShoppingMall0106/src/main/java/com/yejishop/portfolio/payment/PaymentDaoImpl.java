@@ -1,5 +1,7 @@
 package com.yejishop.portfolio.payment;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,4 +18,15 @@ public class PaymentDaoImpl implements PaymentDao {
 	public void insertPayment(CartVO vo) {
 		mybatis.insert("PAYMENTS.insert", vo);
 	}
+
+	@Override
+	public List<PaymentVO> selectAll(PaymentVO vo) {
+		return mybatis.selectList("PAYMENTS.selectAll", vo);
+	}
+
+	@Override
+	public int sumPaymentMoney(PaymentVO vo) {
+		return mybatis.selectOne("PAYMENTS.paymentSumMoney", vo);
+	}
+	
 }
