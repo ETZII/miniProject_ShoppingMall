@@ -39,6 +39,8 @@ public class CartController {
 		if(service.selectCartList(vo).size()!=0) {
 			session.setAttribute("li", service.selectCartList(vo));
 			session.setAttribute("sumMoney",service.sumMoney(vo));
+		} else {
+			session.setAttribute("sumMoney",0);
 		}
 		return "redirect:/cart/cart_list.jsp";
 	}
@@ -56,7 +58,7 @@ public class CartController {
 	}
 
 	@RequestMapping("/deleteCart.do")
-	String deleteCart(CartVO vo) {
+	String deleteCart(CartVO vo,HttpSession session) {
 		service.deleteCart(vo);
 		return "redirect:cartList.do";
 	}

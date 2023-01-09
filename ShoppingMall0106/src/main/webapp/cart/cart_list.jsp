@@ -10,7 +10,6 @@
 
 <script>
 function deleteCart(cartId) {
-	alert(cartId);
 	location.href="${path}/deleteCart.do?cartId="+cartId;
 }
 </script>
@@ -42,7 +41,14 @@ function deleteCart(cartId) {
 	&emsp;</td>
 </tr>
  <tr>
- 	<td colspan="6" align="right">총 금액 : <fmt:formatNumber value="${sumMoney}" pattern=",000"/>원&emsp;&emsp; <input type="submit" value="구매하기" /></td>
+ 	<td colspan="6" align="right">총 금액 : 
+ 	<c:if test="${sumMoney != 0}">
+ 		<fmt:formatNumber value="${sumMoney}" pattern=",000"/>원&emsp;&emsp; 
+ 	</c:if>
+ 	<c:if test="${sumMoney ==0 }">
+ 		<fmt:formatNumber value="${sumMoney}" />원&emsp;&emsp; 
+ 	</c:if>
+ 	<input type="submit" value="구매하기" /></td>
  </tr>
  </table>
  </form>

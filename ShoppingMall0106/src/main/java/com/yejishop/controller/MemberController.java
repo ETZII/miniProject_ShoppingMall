@@ -44,7 +44,6 @@ public class MemberController {
 	@RequestMapping("/logout.do")
 	String logout(HttpSession session) {
 		System.out.println("==> logout  실행");
-		
 		session.invalidate();  
 		
 		return "/member/login.jsp";
