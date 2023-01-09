@@ -45,10 +45,9 @@ public class MemberController {
 	String logout(HttpSession session) {
 		System.out.println("==> logout  실행");
 		
-		session.removeAttribute("memberId");
-		session.removeAttribute("memberGrade");
+		session.invalidate();  
 		
-		return "index.jsp";
+		return "/member/login.jsp";
 	}
 	
 	/* 회원가입 */
