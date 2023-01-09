@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PAYMENTS">
+
+<resultMap type="payment" id="paymentSelectRM">
+		<result property="paymentId" column="pay_id"/>
+		<result property="cartId" column="cart_id"/>
+		<result property="payDate" column="pay_date"/>
+		<result property="isRefund" column="is_refund"/>
+		<result property="pdId" column="pd_id"/>
+		<result property="pdName" column="pd_name"/>
+		<result property="pdPrice" column="pd_price"/>
+	</resultMap>
+
+<insert id="insert" parameterType="payment">
+  insert  into tbl_payedlist(pay_id,cart_id)
+  values ('payment_'||seq_pay_id.nextval,#{cartId}) 
+</insert>
+
+<select id="PaymentSumMoney"  resultType="int">
+select sum(pd_price*amount) 
+ from tbl_payedlist pay
+ 	inner join TBL_CART c on c.cart_id = pay.cart_id
+ 	inner join TBL_PRODUCT p on c.pd_id = p.pd_id
+ where user_id = #{userId}
+</select>
+
+</mapper>
